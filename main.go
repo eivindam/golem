@@ -8,7 +8,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/aaaton/golem/dicts"
+	"github.com/eivindam/golem/dicts"
 )
 
 // Lemmatizer is the key to lemmatizing a word in a language
@@ -25,6 +25,8 @@ func New(locale string) (*Lemmatizer, error) {
 	switch locale {
 	case "sv", "swedish":
 		fname = "sv.gz"
+	case "no", "norwegian":
+		fname = "no.gz"
 	case "en", "english":
 		fname = "en.gz"
 	default:
