@@ -25,6 +25,8 @@ func New(locale string) (*Lemmatizer, error) {
 	switch locale {
 	case "sv", "swedish":
 		fname = "sv.gz"
+	case "nb", "norwegian":
+		fname = "nb.gz"
 	case "en", "english":
 		fname = "en.gz"
 	default:
