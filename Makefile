@@ -8,6 +8,7 @@ download-all:
 	$(MAKE) fr
 	$(MAKE) es
 	$(MAKE) de
+	$(MAKE) no
 	rm data/*.zip	
 	go get -u github.com/jteeuwen/go-bindata/...
 	go-bindata -o data.go -nocompress data/
@@ -27,8 +28,15 @@ es: download
 de: LANG=de
 de: download
 
+no: LANG=no
+no: download
+
 download:
-	curl http://www.lexiconista.com/Datasets/lemmatization-$(LANG).zip > data/$(LANG).zip
-	unzip data/$(LANG).zip -d data
-	mv data/lemmatization-$(LANG).txt data/$(LANG)
-	gzip data/$(LANG)
+	@if [ "$(LANG)" = "no" ]; then \
+		curl http://diskant.no/norwegianwordbank/$(LANG).gz > data/$(LANG).gz; \
+	else \
+		curl http://www.lexiconista.com/Datasets/lemmatization-$(LANG).zip > data/$(LANG).zip; \
+		unzip data/$(LANG).zip -d data; \
+		mv data/lemmatization-$(LANG).txt data/$(LANG); \
+		gzip data/$(LANG); \
+	fi;
