@@ -3,15 +3,16 @@ default: download-all
 LANG=en
 download-all:
 	mkdir -p data
+	rm -r data/*
 	$(MAKE) en
 	$(MAKE) sv
 	$(MAKE) fr
 	$(MAKE) es
 	$(MAKE) de
 	$(MAKE) no
-	rm data/*.zip	
+	rm -r data/*.zip
 	go get -u github.com/jteeuwen/go-bindata/...
-	go-bindata -o data.go -nocompress data/
+	go-bindata -pkg dicts -o dicts/data.go -nocompress data/
 
 en: LANG=en
 en: download
